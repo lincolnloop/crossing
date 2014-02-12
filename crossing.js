@@ -26,7 +26,7 @@
       if (!path) {
         return;
       }
-      for (url in this._compiled) {
+      for (var url in this._compiled) {
         if (path.match(this._compiled[url])) {
           return url;
         }
@@ -42,7 +42,7 @@
   // {'taskEdit': '/task/edit/<taskId>/', 'taskCreate': '/task/create/'}
   // @return {Object} this for method chaining
   crossing.prototype.load = function(urls) {
-    for (url in urls) {
+    for (var url in urls) {
       if (urls.hasOwnProperty(url)) {
         this._compiled[url] = new RegExp('^' + urls[url].replace(this._nameMatcher, "([a-zA-Z0-9-_%]{0,})") + '$');
       }
@@ -65,8 +65,7 @@
       throw('URL not found: ' + name);
     }
     var _path = path;
-    var key;
-    for (key in kwargs) {
+    for (var key in kwargs) {
       if (kwargs.hasOwnProperty(key)) {
       if (!path.match('<' + key +'>')) {
         throw('Invalid parameter ('+ key +') for '+ name);
