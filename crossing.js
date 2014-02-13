@@ -3,6 +3,9 @@
   // Provides utilities to deal with website/app urls. Provides functionality
   // for deep-linking Ajax calls, and a url mapper to generate dynamic urls.
   function crossing() {
+    if (!(this instanceof crossing)) {
+      throw new Error('Crossing can not be called without instatiation. Please use "new Crossing()" instead');
+    }
     this._urls = {};
     this._compiled = {};
     this._lastHash = '';

@@ -1,6 +1,6 @@
 {
   "name": "crossing",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "URL management library for JavaScript",
   "keywords": [
     "url",
@@ -21,7 +21,11 @@
     "crossing.js"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --reporter spec --ui tdd"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "~1.9.0",
+    "mocha": "~1.17.1"
+  }
 }
