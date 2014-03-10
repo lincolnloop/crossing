@@ -1,20 +1,20 @@
 {
   "name": "crossing",
-  "version": "0.1.2",
-  "description": "URL management library for JavaScript",
+  "version": "0.1.3",
+  "description": "URL utility library for JavaScript",
   "keywords": [
     "url",
     "urls",
     "helper"
   ],
-  "homepage": "https://github.com/mlouro/crossing",
+  "homepage": "https://github.com/lincolnloop/crossing",
   "bugs": {
-    "url": "https://github.com/mlouro/crossing/issues"
+    "url": "https://github.com/lincolnloop/crossing/issues"
   },
   "author": "Marco Louro <marco@lincolnloop.com> (http://lincolnloop.com)",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mlouro/crossing.git"
+    "url": "git://github.com/lincolnloop/crossing.git"
   },
   "main": "crossing.js",
   "files": [
