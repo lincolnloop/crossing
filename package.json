@@ -21,7 +21,7 @@
     "crossing.js"
   ],
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec --ui tdd"
+    "test": "mocha --reporter spec --ui tdd"
   },
   "testling": {
     "harness": "mocha-tdd",
