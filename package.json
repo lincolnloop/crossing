@@ -27,13 +27,13 @@
     "harness": "mocha-bdd",
     "files": "test/*.test.js",
     "browsers": [
-      "ie/9..latest",
-      "chrome/28..latest",
-      "firefox/23..latest",
+      "ie/8..latest",
+      "chrome/26..latest",
+      "firefox/22..latest",
       "safari/latest",
       "opera/12.0..latest",
-      "iphone/6",
-      "ipad/6",
+      "iphone/latest",
+      "ipad/latest",
       "android-browser/latest"
     ]
   },
