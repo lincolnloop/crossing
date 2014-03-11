@@ -27,7 +27,7 @@
     "harness": "mocha-bdd",
     "files": "test/*.test.js",
     "browsers": [
-      "ie/8..latest",
+      "ie/9..latest",
       "chrome/26..latest",
       "firefox/22..latest",
       "safari/latest",
