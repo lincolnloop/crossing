@@ -3,6 +3,9 @@ Crossing
 
 Crossing is JavaScript URL utility library that aims to help you manage and generate dynamic urls.
 
+[![browser support](https://ci.testling.com/lincolnloop/crossing.png)
+](https://ci.testling.com/lincolnloop/crossing)
+
 Here's what it looks like:
 
 ### The basics
