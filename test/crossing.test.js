@@ -37,8 +37,8 @@ describe("Crossing Tests", function() {
     it("has the right number of compiled urls", function() {
       expect(Object.keys(urls._compiled)).to.have.length(3);
     });
-    it("has the urls properly compiled as regular expressions", function() {
-      expect('/^([a-zA-Z0-9-_%]{0,})/([a-zA-Z0-9-_%]{0,})/([a-zA-Z0-9-_%]{0,})/$/').to.have.string(urls._compiled['discussion:detail']);
+    it("has the urls properly matching the regular expressions", function() {
+      expect('test/test2/test-3/'.match(urls._compiled['discussion:detail'])).to.have.length(4);
     });
   });
 
