@@ -42,7 +42,7 @@ describe("Crossing Tests", function() {
     });
   });
 
-  describe("#get()", function() {
+  describe("#get() with kwargs", function() {
     var urls = new Crossing();
 
     it("can get urls without parameters", function () {
@@ -73,6 +73,26 @@ describe("Crossing Tests", function() {
     });
   });
 
+
+  describe("#get() with args", function() {
+    var urls = new Crossing();
+
+    it("can get urls with one parameter", function () {
+      urls.load(urlList);
+      expect(urls.get('team:detail', 'loop')).to.equal('loop/');
+    });
+    it("can get urls with multiple parameters", function () {
+      expect(urls.get('discussion:detail', 'loop', '3', 'discussion')).to.equal('loop/3/discussion/');
+    });
+    it("can not get urls with missing parameters", function () {
+      try {
+        var url = urls.get('discussion:detail', 'loop');
+        expect(url).to.not.be.ok;
+      } catch (e) {
+        expect(e).to.equal("Missing arguments (<discussion_id>, <slug>) for url <team_slug>/<discussion_id>/<slug>/");
+      }
+    });
+  });
 
   describe("#resolve()", function() {
     var urls = new Crossing();

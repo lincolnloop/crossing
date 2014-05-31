@@ -54,6 +54,28 @@
     return this;
   };
 
+  crossing.prototype._getPathByKwargs = function(name, kwargs) {
+    var path = this._urls[name];
+    for (var key in kwargs) {
+      if (kwargs.hasOwnProperty(key)) {
+        if (!path.match('<' + key +'>')) {
+          throw('Invalid parameter ('+ key +') for '+ name);
+        }
+        path = path.replace('<' + key +'>', kwargs[key]);
+      }
+    }
+    return path;
+  };
+
+  crossing.prototype._getPathByArgs = function(name, args) {
+    var path = this._urls[name];
+    var keys = path.match(this._nameMatcher);
+    for (var $x = 1; $x < args.length; $x+=1) {
+      path = path.replace(keys[$x-1], args[$x]);
+    }
+    return path;
+  };
+
   // Returns a url from the list that matches the specified parameters.
   // A non-existant url will raise an exception.
   // @method get
@@ -64,17 +86,15 @@
   // @return {String} url path
   crossing.prototype.get = function(name, kwargs) {
     var path = this._urls[name];
-    if (!path) {
+    if (!this._urls[name]) {
       throw('URL not found: ' + name);
     }
     var _path = path;
-    for (var key in kwargs) {
-      if (kwargs.hasOwnProperty(key)) {
-      if (!path.match('<' + key +'>')) {
-        throw('Invalid parameter ('+ key +') for '+ name);
-      }
-      path = path.replace('<' + key +'>', kwargs[key]);
-      }
+
+    if (!kwargs || Object.prototype.toString.call(kwargs) === '[object Object]') {
+      path = this._getPathByKwargs(name, kwargs);
+    } else {
+      path = this._getPathByArgs(name, arguments);
     }
 
     var missingArgs = path.match(this._nameMatcher);
