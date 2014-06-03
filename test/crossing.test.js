@@ -9,7 +9,8 @@ describe("Crossing Tests", function() {
     urlList = {
       'discussion:detail': '<team_slug>/<discussion_id>/<slug>/',
       'search': 'search/',
-      'team:detail': '<slug>/'
+      'team:detail': '<slug>/',
+      'api:lastread': '/api/v2/discussion/<discussion_id>/read/'
     };
   });
 
@@ -35,7 +36,7 @@ describe("Crossing Tests", function() {
       expect(urls).to.be.ok;
     });
     it("has the right number of compiled urls", function() {
-      expect(Object.keys(urls._compiled)).to.have.length(3);
+      expect(Object.keys(urls._compiled)).to.have.length(4);
     });
     it("has the urls properly matching the regular expressions", function() {
       expect('test/test2/test-3/'.match(urls._compiled['discussion:detail'])).to.have.length(4);
@@ -77,9 +78,13 @@ describe("Crossing Tests", function() {
   describe("#get() with args", function() {
     var urls = new Crossing();
 
-    it("can get urls with one parameter", function () {
+    it("can get urls with one parameter at the start", function () {
       urls.load(urlList);
       expect(urls.get('team:detail', 'loop')).to.equal('loop/');
+    });
+    it("can get urls with one numeric parameter at the middle", function () {
+      urls.load(urlList);
+      expect(urls.get('api:lastread', 16468)).to.equal('/api/v2/discussion/16468/read/');
     });
     it("can get urls with multiple parameters", function () {
       expect(urls.get('discussion:detail', 'loop', '3', 'discussion')).to.equal('loop/3/discussion/');
