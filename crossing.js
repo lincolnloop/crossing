@@ -2,14 +2,18 @@
   'use strict';
   // Provides utilities to deal with website/app urls. Provides functionality
   // for deep-linking Ajax calls, and a url mapper to generate dynamic urls.
-  function crossing() {
+  function crossing(nameMatcher) {
     if (!(this instanceof crossing)) {
       throw new Error('Crossing can not be called without instatiation. Please use "new Crossing()" instead');
     }
     this._urls = {};
     this._compiled = {};
     this._lastHash = '';
-    this._nameMatcher = new RegExp('<([a-zA-Z0-9-_%]{1,})>', 'g');
+    if (nameMatcher) {
+      this._nameMatcher = nameMatcher;
+    } else {
+      this._nameMatcher = new RegExp('<([a-zA-Z0-9-_%]{1,})>', 'g');
+    }
 
     this._getArgs = function(urlName, path) {
       var args = {};
@@ -116,7 +120,6 @@
     var urlName;
     var kwargs;
     urlName = this._getName(path);
-    //console.log(url + ' => ' + urlName);
     if (urlName) {
       kwargs = this._getArgs(urlName, path);
       url['name'] = urlName;
@@ -132,4 +135,3 @@
     window.crossing = crossing;
   }
 })();
-
