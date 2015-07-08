@@ -16,6 +16,8 @@ Crossing is JavaScript URL utility library that aims to help you manage and gene
 
 ```javascript
 
+  var Crossing = require('crossing');
+
   // create your crossing instance
   var urls = new Crossing();
 
