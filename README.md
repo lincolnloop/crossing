@@ -6,9 +6,13 @@ Crossing is JavaScript URL utility library that aims to help you manage and gene
 [![browser support](https://ci.testling.com/lincolnloop/crossing.png)
 ](https://ci.testling.com/lincolnloop/crossing)
 
-Here's what it looks like:
+### Install
 
-### The basics
+  ```npm install crossing```
+
+
+### Basic Use
+
 
 ```javascript
 
@@ -31,3 +35,7 @@ Here's what it looks like:
 ```
 
 That's all there is to it! Enjoy!
+
+### Run Tests
+
+    npm test
