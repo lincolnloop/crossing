@@ -115,4 +115,23 @@ describe("Crossing Tests", function() {
 
   });
 
+  describe("#override matched param format", function () {
+    var urls = new Crossing(new RegExp(':([a-zA-Z0-9-_%]{1,})', 'g'));
+    var reactRouterPaths = {
+      'discussion:detail': ':team_slug/:discussion_id/:slug/',
+      'search': 'search/'
+    };
+
+    it("can resolve urls with parameters", function () {
+      urls.load(reactRouterPaths);
+      expect(urls.resolve('loop/23/discussion-name/').name).to.equal('discussion:detail');
+      expect(Object.keys(urls.resolve('loop/23/discussion-name/').kwargs).length).to.equal(3);
+    });
+    it("can resolve urls without parameters", function () {
+      urls.load(reactRouterPaths);
+      expect(urls.resolve('search/').name).to.equal('search');
+      expect(Object.keys(urls.resolve('search/').kwargs).length).to.equal(0);
+    });
+  });
+
 });
