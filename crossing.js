@@ -63,7 +63,7 @@
     for (var key in kwargs) {
       if (kwargs.hasOwnProperty(key)) {
         if (!path.match('<' + key +'>')) {
-          throw('Invalid parameter ('+ key +') for '+ name);
+          throw new Error('Invalid parameter ('+ key +') for '+ name);
         }
         path = path.replace('<' + key +'>', kwargs[key]);
       }
@@ -91,7 +91,7 @@
   crossing.prototype.get = function(name, kwargs) {
     var path = this._urls[name];
     if (!this._urls[name]) {
-      throw('URL not found: ' + name);
+      throw new Error('URL not found: ' + name);
     }
     var _path = path;
 
@@ -103,7 +103,7 @@
 
     var missingArgs = path.match(this._nameMatcher);
     if (missingArgs) {
-      throw('Missing arguments (' + missingArgs.join(", ") + ') for url ' + _path);
+      throw new Error('Missing arguments (' + missingArgs.join(", ") + ') for url ' + _path);
     }
 
     return path;
