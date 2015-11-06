@@ -61,7 +61,8 @@ describe("Crossing Tests", function() {
         var url = urls.get('discussion:detail', {'team': 'loop', 'discussion_id': '3', 'slug': 'discussion'});
         expect(url).to.not.be.ok;
       } catch (e) {
-        expect(e).to.equal('Invalid parameter (team) for discussion:detail');
+        expect(e).to.be.instanceOf(Error);
+        expect(e.message).to.equal('Invalid parameter (team) for discussion:detail');
       }
     });
     it("can not get urls with missing parameters", function () {
@@ -69,7 +70,8 @@ describe("Crossing Tests", function() {
         var url = urls.get('discussion:detail');
         expect(url).to.not.be.ok;
       } catch (e) {
-        expect(e).to.equal("Missing arguments (<team_slug>, <discussion_id>, <slug>) for url <team_slug>/<discussion_id>/<slug>/");
+        expect(e).to.be.instanceOf(Error);
+        expect(e.message).to.equal("Missing arguments (<team_slug>, <discussion_id>, <slug>) for url <team_slug>/<discussion_id>/<slug>/");
       }
     });
   });
@@ -94,7 +96,8 @@ describe("Crossing Tests", function() {
         var url = urls.get('discussion:detail', 'loop');
         expect(url).to.not.be.ok;
       } catch (e) {
-        expect(e).to.equal("Missing arguments (<discussion_id>, <slug>) for url <team_slug>/<discussion_id>/<slug>/");
+        expect(e).to.be.instanceOf(Error);
+        expect(e.message).to.equal("Missing arguments (<discussion_id>, <slug>) for url <team_slug>/<discussion_id>/<slug>/");
       }
     });
   });
