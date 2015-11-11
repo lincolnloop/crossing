@@ -56,15 +56,6 @@ describe("Crossing Tests", function() {
     it("can get urls with multiple parameters", function () {
       expect(urls.get('discussion:detail', {'team_slug': 'loop', 'discussion_id': '3', 'slug': 'discussion'})).to.equal('loop/3/discussion/');
     });
-    it("can not get urls with wrong parameters", function () {
-      try {
-        var url = urls.get('discussion:detail', {'team': 'loop', 'discussion_id': '3', 'slug': 'discussion'});
-        expect(url).to.not.be.ok;
-      } catch (e) {
-        expect(e).to.be.instanceOf(Error);
-        expect(e.message).to.equal('Invalid parameter (team) for discussion:detail');
-      }
-    });
     it("can not get urls with missing parameters", function () {
       try {
         var url = urls.get('discussion:detail');
