@@ -60,14 +60,23 @@
 
   crossing.prototype._getPathByKwargs = function(name, kwargs) {
     var path = this._urls[name];
-    for (var key in kwargs) {
-      if (kwargs.hasOwnProperty(key)) {
-        if (!path.match('<' + key +'>')) {
-          throw new Error('Invalid parameter ('+ key +') for '+ name);
+    var matcher = this._nameMatcher;
+
+    if (kwargs) {
+      var args = path.match(matcher);
+
+      for (var i = 0; i < args.length; i++) {
+        var match = args[i];
+        var arg = match.replace(matcher, '$1');
+
+        if (typeof kwargs[arg] === 'undefined') {
+          throw new Error('Missing parameter (' + arg + ') for ' + name);
         }
-        path = path.replace('<' + key +'>', kwargs[key]);
+
+        path = path.replace(match, kwargs[arg]);
       }
     }
+
     return path;
   };
 
