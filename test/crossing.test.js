@@ -56,15 +56,6 @@ describe("Crossing Tests", function() {
     it("can get urls with multiple parameters", function () {
       expect(urls.get('discussion:detail', {'team_slug': 'loop', 'discussion_id': '3', 'slug': 'discussion'})).to.equal('loop/3/discussion/');
     });
-    it("can not get urls with wrong parameters", function () {
-      try {
-        var url = urls.get('discussion:detail', {'team': 'loop', 'discussion_id': '3', 'slug': 'discussion'});
-        expect(url).to.not.be.ok;
-      } catch (e) {
-        expect(e).to.be.instanceOf(Error);
-        expect(e.message).to.equal('Invalid parameter (team) for discussion:detail');
-      }
-    });
     it("can not get urls with missing parameters", function () {
       try {
         var url = urls.get('discussion:detail');
@@ -122,7 +113,8 @@ describe("Crossing Tests", function() {
     var urls = new Crossing(new RegExp(':([a-zA-Z0-9-_%]{1,})', 'g'));
     var reactRouterPaths = {
       'discussion:detail': ':team_slug/:discussion_id/:slug/',
-      'search': 'search/'
+      'search': 'search/',
+      'team:detail': ':slug/',
     };
 
     it("can resolve urls with parameters", function () {
@@ -134,6 +126,14 @@ describe("Crossing Tests", function() {
       urls.load(reactRouterPaths);
       expect(urls.resolve('search/').name).to.equal('search');
       expect(Object.keys(urls.resolve('search/').kwargs).length).to.equal(0);
+    });
+
+    it("can get urls with one parameter", function () {
+      expect(urls.get('team:detail', {'slug': 'loop'})).to.equal('loop/');
+    });
+
+    it("can get urls with multiple parameters", function () {
+      expect(urls.get('discussion:detail', {'team_slug': 'loop', 'discussion_id': '3', 'slug': 'discussion'})).to.equal('loop/3/discussion/');
     });
   });
 
