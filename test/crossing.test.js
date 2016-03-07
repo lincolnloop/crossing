@@ -98,8 +98,12 @@ describe("Crossing Tests", function() {
 
     it("can resolve urls with parameters", function () {
       urls.load(urlList);
-      expect(urls.resolve('loop/23/discussion-name/').name).to.equal('discussion:detail');
-      expect(Object.keys(urls.resolve('loop/23/discussion-name/').kwargs).length).to.equal(3);
+      var resolved = urls.resolve('loop/23/discussion-name/');
+      expect(resolved.name).to.equal('discussion:detail');
+      expect(Object.keys(resolved.kwargs).length).to.equal(3);
+      expect(resolved.kwargs.team_slug).to.equal('loop');
+      expect(resolved.kwargs.discussion_id).to.equal('23');
+      expect(resolved.kwargs.slug).to.equal('discussion-name');
     });
     it("can resolve urls without parameters", function () {
       urls.load(urlList);
@@ -119,8 +123,12 @@ describe("Crossing Tests", function() {
 
     it("can resolve urls with parameters", function () {
       urls.load(reactRouterPaths);
-      expect(urls.resolve('loop/23/discussion-name/').name).to.equal('discussion:detail');
-      expect(Object.keys(urls.resolve('loop/23/discussion-name/').kwargs).length).to.equal(3);
+      var resolved = urls.resolve('loop/23/discussion-name/');
+      expect(resolved.name).to.equal('discussion:detail');
+      expect(Object.keys(resolved.kwargs).length).to.equal(3);
+      expect(resolved.kwargs.team_slug).to.equal('loop');
+      expect(resolved.kwargs.discussion_id).to.equal('23');
+      expect(resolved.kwargs.slug).to.equal('discussion-name');
     });
     it("can resolve urls without parameters", function () {
       urls.load(reactRouterPaths);
