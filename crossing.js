@@ -17,14 +17,13 @@
 
     this._getArgs = function(urlName, path) {
       var args = {};
-      var nameMatches = this._urls[urlName].match(this._nameMatcher);
       var valueMatches = path.match(this._compiled[urlName]);
-      if (nameMatches) {
-        var i, len, arg;
-        for (i=0, len=nameMatches.length; i<len; i+=1) {
-          arg = nameMatches[i].substring(1, nameMatches[i].length-1);
-          args[arg] = valueMatches[i+1];;
-        }
+      var i=0;
+      var match = this._nameMatcher.exec(this._urls[urlName]);
+      while(match && match.length === 2 && valueMatches.length + 1 > i) {
+        var arg = match[1];
+        args[arg] = valueMatches[++i];
+        match = this._nameMatcher.exec(this._urls[urlName]);
       }
       return args;
     };
