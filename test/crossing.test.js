@@ -145,4 +145,30 @@ describe("Crossing Tests", function() {
     });
   });
 
+  describe("#trailing slash", function () {
+    it('should be sensitive to trailing slash by default', function () {
+      var urls = new Crossing();
+      urls.load({
+        'discussion:detail': '<team_slug>/<discussion_id>/<slug>/',
+        'search': 'search'
+      });
+      expect(urls.resolve('loop/23/discussion-name')).to.equal(undefined);
+      expect(urls.resolve('loop/23/discussion-name/').name).to.equal('discussion:detail');
+      expect(urls.resolve('search').name).to.equal('search');
+      expect(urls.resolve('search/')).to.equal(undefined);
+    });
+
+    it('should resolve url with or without trailing slash if ignoreTrailingSlash param is true', function () {
+      var urls = new Crossing(null, true);
+      urls.load({
+        'discussion:detail': '<team_slug>/<discussion_id>/<slug>',
+        'search': 'search'
+      });
+      expect(urls.resolve('loop/23/discussion-name').name).to.equal('discussion:detail');
+      expect(urls.resolve('loop/23/discussion-name/').name).to.equal('discussion:detail');
+      expect(urls.resolve('search').name).to.equal('search');
+      expect(urls.resolve('search/').name).to.equal('search');
+    });
+  });
+
 });
