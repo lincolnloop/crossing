@@ -50,6 +50,10 @@ describe("Crossing Tests", function() {
       urls.load(urlList);
       expect(urls.get('search')).to.equal('search/');
     });
+    it("can get urls with void kwargs", function () {
+      urls.load(urlList);
+      expect(urls.get('search',{})).to.equal('search/');
+    });
     it("can get urls with one parameter", function () {
       expect(urls.get('team:detail', {'slug': 'loop'})).to.equal('loop/');
     });
