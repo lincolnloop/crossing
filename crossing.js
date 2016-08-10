@@ -66,16 +66,17 @@
 
     if (kwargs) {
       var args = path.match(matcher);
-
-      for (var i = 0; i < args.length; i++) {
-        var match = args[i];
-        var arg = match.replace(matcher, '$1');
-
-        if (typeof kwargs[arg] === 'undefined') {
-          throw new Error('Missing parameter (' + arg + ') for ' + name);
+      if (args) {
+        for (var i = 0; i < args.length; i++) {
+          var match = args[i];
+          var arg = match.replace(matcher, '$1');
+  
+          if (typeof kwargs[arg] === 'undefined') {
+            throw new Error('Missing parameter (' + arg + ') for ' + name);
+          }
+  
+          path = path.replace(match, kwargs[arg]);
         }
-
-        path = path.replace(match, kwargs[arg]);
       }
     }
 
